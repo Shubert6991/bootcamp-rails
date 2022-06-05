@@ -23,25 +23,30 @@ default: &default
 
 development:
   <<: *default
-  database: bootcamp_ruby_development
+  # database: bootcamp_ruby_development
+  database: <%= ENV['DATABASE_NAME'] %>
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
   # When left blank, postgres will use the default role. This is
   # the same name as the operating system user running Rails.
-  username: bootcamp_ruby
+  # username: bootcamp_ruby
+  username: <%= ENV['DATABASE_USERNAME'] %>
 
   # The password associated with the postgres role (username).
-  password: 1234
+  # password: 1234
+  password: <%= ENV['DATABASE_PASSWORD'] %>
 
   # Connect on a TCP socket. Omitted by default since the client uses a
   # domain socket that doesn't need configuration. Windows does not have
   # domain sockets, so uncomment these lines.
-  host: 127.0.0.1
+  # host: 127.0.0.1
+  host: <%= ENV['DATABASE_HOST'] %>
 
   # The TCP port the server listens on. Defaults to 5432.
   # If your server runs on a different port number, change accordingly.
   #port: 5432
+  port: <%= ENV['DATABASE_PORT'] %>
 
   # Schema search path. The server defaults to $user,public
   #schema_search_path: myapp,sharedapp,public
@@ -58,6 +63,10 @@ development:
 test:
   <<: *default
   database: bootcamp_ruby_test
+  username: <%= ENV['DATABASE_USERNAME'] %>
+  password: <%= ENV['DATABASE_PASSWORD'] %>
+  host: <%= ENV['DATABASE_HOST'] %>
+  port: <%= ENV['DATABASE_PORT'] %>
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -81,7 +90,9 @@ test:
 #
 production:
   <<: *default
-  database: bootcamp_ruby_production
-  username: bootcamp_ruby
-  password: <%= ENV['BOOTCAMP_RUBY_DATABASE_PASSWORD'] %>
-  # password: 1234
+  database: bootcamp_ruby_test
+  username: <%= ENV['DATABASE_USERNAME'] %>
+  password: <%= ENV['DATABASE_PASSWORD'] %>
+  host: <%= ENV['DATABASE_HOST'] %>
+  port: <%= ENV['DATABASE_PORT'] %>
+
